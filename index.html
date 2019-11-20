@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据治理</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/index.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 mx-auto">
+                <div id="first">
+                    <div class="myform form ">
+                        <div class="logo mb-3">
+                            <div class="col-md-12 text-center">
+                                <h1>登录</h1>
+                            </div>
+                        </div>
+                        <form action="./login.json" method="post" name="login" novalidate="novalidate">
+                            <div class="form-group">
+                                <label>用户ID：</label>
+                                <input type="text" name="loginYHID" id="loginYHID" class="form-control" placeholder="输入用户ID">
+                            </div>
+                            <div class="form-group">
+                                <label>部门ID：</label>
+                                <input type="text" name="loginBMID" id="loginBMID" class="form-control" placeholder="输入部门ID">
+                            </div>
+                            <div class="col-md-12 text-center ">
+                                <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">登录</button>
+                            </div>
+                            <div class="col-md-12 ">
+                                <div class="login-or">
+                                    <hr class="hr-or">
+                                    <span class="span-or">or</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-center">还没有账户吗? <a href="#" id="signup">点这里注册</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="second">
+                    <div class="myform form ">
+                        <div class="logo mb-3">
+                            <div class="col-md-12 text-center">
+                                <h1>注册</h1>
+                            </div>
+                        </div>
+                        <form name="registration" novalidate="novalidate">
+                            <div class="form-group">
+                                <label>用户ID：</label>
+                                <input type="text" name="registYHID" id="registYHID" class="form-control" placeholder="输入用户ID">
+                            </div>
+                            <div class="form-group">
+                                <label>部门ID：</label>
+                                <input type="text" name="registBMID" id="registBMID" class="form-control" placeholder="输入部门ID">
+                            </div>
+                            <div class="form-group">
+                                <label>部门级别：</label>
+                                <input type="text" name="registBMJB" id="registBMJB" class="form-control" placeholder="输入部门级别">
+                            </div>
+                            <div class="form-group">
+                                <label>用户名：</label>
+                                <input type="text" name="registYHQM" id="registYHQM" class="form-control" placeholder="输入用户名">
+                            </div>
+                            <div class="col-md-12 text-center mb-3">
+                                <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">注册</button>
+                            </div>
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <p class="text-center"><a href="#" id="signin">已有账号点这里?</a></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<div class="alert alert-success hide" role="alert" id="success-msg">正确</div>
+	
+	<div class="alert alert-danger hide" role="alert" id="error-msg">数据出错</div>
+    
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.validate.min.js"></script>
+    <script src="./js/jquery.form.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>

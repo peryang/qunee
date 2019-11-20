@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <title>数据治理-拓扑展示</title>
+
+    <link rel="stylesheet" href="js/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="demo.css"/>
+</head>
+<body>
+    
+<div style="padding-left: calc(50% - 300px);margin-top: 50px;">
+    <div class="search-item input-group">
+        <span class="input-group-addon" id="basic-addon1" style="width: 80px;">编码：</span>
+        <input id="inputSCBM" type="text" class="form-control" style="width: 300px;" placeholder="请输入编码" aria-describedby="basic-addon1">
+    </div>
+    <button type="button" style="margin-left: 8px;width: 80px;" id="searchBtn" class="btn btn-default">搜索</button>
+</div>
+
+<button class="btn" style="float: left;margin-left: 100px;margin-bottom: 40px;">
+    <a href="./index.html">主链</a>
+</button>
+<button class="btn" style="float: left;margin-left: 20px;margin-bottom: 40px;">
+    <a href="javascript:void()">侧链</a>
+</button>
+
+<!-- 按钮触发模态框 -->
+<button class="btn btn-primary" data-toggle="modal" data-target="#getQBUUID" style="float: right;margin-right: 100px;margin-bottom: 40px;">申请QB唯一码</button>
+<button class="btn btn-primary" data-toggle="modal" data-target="#addPro" style="float: right;margin-right: 30px;margin-bottom: 40px;">添加半成品</button>
+<button class="btn btn-primary" data-toggle="modal" data-target="#addSucai" style="float: right;margin-right: 30px;margin-bottom: 40px;">添加素材</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="addPro" tabindex="-1" role="dialog" aria-labelledby="addProLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="addProLabel">添加半成品</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>动向QB唯一码：</label>
+                    <input type="text" name="DXQBWYM" id="DXQBWYM" class="form-control" placeholder="输入动向QB唯一码">
+                </div>
+                <div class="form-group">
+                    <label>动向QB内码：</label>
+                    <input type="text" name="DXQBNM" id="DXQBNM" class="form-control" placeholder="输入动向QB内码">
+                </div>
+                <div class="form-group">
+                    <label>用户编号：</label>
+                    <input type="text" name="YHBH" id="YHBH" class="form-control" placeholder="输入用户编号">
+                </div>
+                <div class="form-group">
+                    <label>副本原件：</label>
+                    <select class="form-control" id="FBDX">
+                        <option value="" selected>空</option>
+                        <option value="0">原件</option>
+                        <option value="1">副本</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>是否有副本：</label>
+                    <select class="form-control" id="SFYFB">
+                        <option value="" selected>空</option>
+                        <option value="0">有</option>
+                        <option value="1">无</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>副本名称：</label>
+                    <input type="text" name="FBMC" id="FBMC" class="form-control" placeholder="输入副本名称">
+                </div>
+                <div class="form-group">
+                    <label>修改记录：</label>
+                    <input type="text" name="JLBH" id="JLBH" class="form-control" placeholder="输入修改记录">
+                </div>
+                <div class="form-group">
+                    <label>正文内容：</label>
+                    <input type="text" name="ZWNR" id="ZWNR" class="form-control" placeholder="输入正文内容">
+                </div>
+                <div class="form-group">
+                    <label>席位：</label>
+                    <input type="text" name="XW" id="XW" class="form-control" placeholder="输入席位">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="addProSubmit">添加</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="addSucai" tabindex="-1" role="dialog" aria-labelledby="addSucaiLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="addSucaiLabel">添加素材</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>半成品QB唯一码：</label>
+                    <input type="text" name="SUCAIDXQBWYM" id="SUCAIDXQBWYM" class="form-control" placeholder="输入半成品QB唯一码">
+                </div>
+                <div class="form-group">
+                    <label>半成品QB内码：</label>
+                    <input type="text" name="SUCAIBCPTMDXQBNM" id="SUCAIBCPTMDXQBNM" class="form-control" placeholder="输入半成品QB内码">
+                </div>
+                <div class="form-group">
+                    <label>素材QB唯一码：</label>
+                    <input type="text" name="SUCAISCTMDXQBWYM" id="SUCAISCTMDXQBWYM" class="form-control" placeholder="输入素材QB唯一码">
+                </div>
+                <div class="form-group">
+                    <label>素材QB内码：</label>
+                    <input type="text" name="SUCAISCTMDXQBNM" id="SUCAISCTMDXQBNM" class="form-control" placeholder="输入素材QB内码">
+                </div>
+                <div class="form-group">
+                    <label>情报类型：</label>
+                    <input type="text" name="SUCAIQBLX" id="SUCAIQBLX" class="form-control" placeholder="输入情报类型">
+                </div>
+                <div class="form-group">
+                    <label>数据标题：</label>
+                    <input type="text" name="SUCAIBT" id="SUCAIBT" class="form-control" placeholder="输入数据标题">
+                </div>
+                <div class="form-group">
+                    <label>上报单位：</label>
+                    <input type="text" name="SUCAISBDW" id="SUCAISBDW" class="form-control" placeholder="输入上报单位">
+                </div>
+                <div class="form-group">
+                    <label>报文形式：</label>
+                    <input type="text" name="SUCAIBWXS" id="SUCAIBWXS" class="form-control" placeholder="输入报文形式">
+                </div>
+                <div class="form-group">
+                    <label>发文编号：</label>
+                    <input type="text" name="SUCAIFWBH" id="SUCAIFWBH" class="form-control" placeholder="输入发文编号">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="addSucaiSubmit">添加</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="getQBUUID" tabindex="-1" role="dialog" aria-labelledby="getQBUUIDLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="">获取QB唯一码</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>QB类型：</label>
+                    <input type="text" name="QBLX" id="QBLX" value="1" disabled class="form-control" placeholder="输入QB类型">
+                </div>
+                <div class="form-group">
+                    <label>QB内码：</label>
+                    <input type="text" name="QBNM" id="QBNM" class="form-control" placeholder="输入QB内码">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="getQBUUIDSubmit">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<div id="page">
+    <div id="right_panel">
+        <div id="graph_panel" class="q-panel">
+            <div role="toolbar" class="q-toolbar">
+                <div>
+                    <div id="toolbar"></div>
+                </div>
+            </div>
+            <div class="q-content">
+                <div id="canvas"></div>
+                <div class="mask" id="mask_panel">
+                    <div class="loading">Loading...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="showResult" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">QB唯一码</h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+	
+<div class="alert alert-success hide" role="alert" id="success-msg">正确</div>
+
+<div class="alert alert-danger hide" role="alert" id="error-msg">数据出错</div>
+
+<script type="text/javascript" src="js/jquery/jquery.min.js?v=2.0"></script>
+<script type="text/javascript" src="js/bootstrap/bootstrap.min.js?v=2.0"></script>
+<script type="text/javascript" src="./lib/qunee-min.js?v=2.0"></script>
+<script type="text/javascript" src="js/common.js?v=2.0"></script>
+<script type="text/javascript" src="js/graphs.js?v=2.0"></script>
+<script type="text/javascript" src="basic/otherlink.js"></script>
+</body>
+</html> 
