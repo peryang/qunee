@@ -180,10 +180,10 @@ $(function () {
     
     $("#searchBtn").click(function () {
         $.ajax({
-            // url: "/v1/chaincode/operation",
-            // type:"post",
-            url: "./otherlink.json",
-            type:"get",
+            url: "/v1/chaincode/operation",
+            type:"post",
+//          url: "./otherlink.json",
+//          type:"get",
             data: JSON.stringify({
 				CZLX:"1", 
                 DYLX:"query",
@@ -240,27 +240,9 @@ $(function () {
 					for (var e = 0; e < edges.length;  e ++) {
 						createEdge("", testArr[edges[e].from], testArr[edges[e].to]);
 					}
-					var enode11 = createNode("", 700, 900);
-					enode11.image = "";
-					var enode12 = createNode("", 700, 1300);
-					enode12.image = "";
-					
-					var enode21 = createNode("", 300, 900);
-					enode21.image = "";
-					var enode22 = createNode("", 300, 1300);
-					enode22.image = "";
-					
-					edge = createEdge("", enode11, enode12, null, "rgba(0, 0, 0, .1)");
-					edge = createEdge("", enode21, enode22, null, "rgba(0, 0, 0, .1)");
-					
-					var level1 = createNode("ZQ", 900, 1000);
-					level1.image = "";
-					
-					var level2 = createNode("ZQFY", 500, 1000);
+
+					var level2 = createNode("半成品溯源", 500, 1000);
 					level2.image = "";
-					
-					var level3 = createNode("BD", 100, 1000);
-					level3.image = "";
 					
 					graph.moveToCenter(1);
 				} else {
