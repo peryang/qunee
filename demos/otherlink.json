@@ -16,7 +16,7 @@
                     "JLBH": "",
                     "ZWNR": "副本3",
                     "XW": "副本3",
-                    "images": "abc.png",
+                    "images": "banchengpin.png",
                     "type": "type1",
                     "level": 1
                 },
@@ -32,7 +32,7 @@
                     "JLBH": "",
                     "ZWNR": "副本2",
                     "XW": "副本2",
-                    "images": "abc.png",
+                    "images": "banchengpin.png",
                     "type": "type1",
                     "level": 2
                 },
@@ -48,7 +48,7 @@
                     "JLBH": "",
                     "ZWNR": "副本1",
                     "XW": "副本1",
-                    "images": "abc.png",
+                    "images": "banchengpin.png",
                     "type": "type1",
                     "level": 3
                 },
@@ -64,7 +64,7 @@
                     "JLBH": "",
                     "ZWNR": "原件1",
                     "XW": "",
-                    "images": "abc.png",
+                    "images": "banchengpin.png",
                     "type": "type1",
                     "level": 4
                 },
@@ -80,7 +80,7 @@
                     "SBDW": "部队1",
                     "FWBH": "素材1",
                     "BWXS": "素材1",
-                    "images": "def.png",
+                    "images": "sucai.png",
                     "type": "type2",
                     "level": 5
                 },
@@ -96,7 +96,7 @@
                     "SBDW": "部队1",
                     "FWBH": "素材2",
                     "BWXS": "素材2",
-                    "images": "def.png",
+                    "images": "sucai.png",
                     "type": "type2",
                     "level": 5
                 }

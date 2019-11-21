@@ -18,7 +18,7 @@ graph.ondblclick = function(evt){
 function createNode(name, x, y, image){
     var node = graph.createNode(name, x, y);
     if(image){
-        node.image = "./network/images/" + image;
+        node.image = "./network/images2/" + image;
     }
     return node;
 }
