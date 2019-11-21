@@ -39,13 +39,25 @@ function createEdge(name, from, to, edgeType, color){
 }
 
 function clearForm() {
-	$("#QBLX").val("");
-	$("#BT").val("");
-	$("#SBDW").val("");
-	$("#PY").val("");
-	$("#FWBH").val("");
-	$("#SCBM").val("");
-	$("#BWXS").val("");
+    $("#DXQBWYM").val("");
+    $("#DXQBNM").val("");
+    $("#YHBH").val("");
+    $('#FBDX').children('option').eq(0).prop('selected', true);
+    $('#SFYFB').children('option').eq(0).prop('selected', true);
+    $("#FBMC").val("");
+    $("#JLBH").val("");
+    $("#ZWNR").val("");
+    $("#XW").val("");
+    
+    $("#SUCAIDXQBWYM").val("");
+    $("#SUCAIBCPTMDXQBNM").val("");
+    $("#SUCAISCTMDXQBWYM").val("");
+    $("#SUCAISCTMDXQBNM").val("");
+    $("#SUCAIQBLX").val("");
+    $("#SUCAIBT").val("");
+    $("#SUCAISBDW").val("");
+    $("#SUCAIBWXS").val("");
+    $("#SUCAIFWBH").val("");
 }
 
 function parseData(data) {
@@ -81,7 +93,7 @@ $(function () {
                     "JLBH": $("#JLBH").val(),
                     "ZWNR": $("#ZWNR").val(),
 			    	"XW": $("#XW").val(),
-                    "SJSJ": new Date().getTime()
+                    "SJSJ": moment().format("YYYY-MM-DD HH:mm:ss")
 				},
                 "YHID": localStorage.getItem("YHID")
             }),
@@ -92,12 +104,13 @@ $(function () {
 					$("#success-msg").html("添加半成品成功").removeClass("hide");
 					setTimeout(function(){
 						$("#success-msg").addClass("hide");
-						$('#myModal').modal('hide');
+						$('#addPro').modal('hide');
 					}, 2000);
 				} else {
 					$("#error-msg").html("添加半成品失败").removeClass("hide");
 					setTimeout(function(){
 						$("#error-msg").addClass("hide");
+                        $('#addPro').modal('hide');
 					}, 2000);
 				}
             }
@@ -123,7 +136,7 @@ $(function () {
                     "SBDW": $("#SUCAISBDW").val(),
                     "BWXS": $("#SUCAIBWXS").val(),
                     "FWBH": $("#SUCAIFWBH").val(),
-                    "LBSJ": new Date().getTime()
+                    "LBSJ": moment().format("YYYY-MM-DD HH:mm:ss")
                 },
                 "YHID": localStorage.getItem("YHID")
             }),
@@ -134,12 +147,13 @@ $(function () {
                     $("#success-msg").html("添加素材成功").removeClass("hide");
                     setTimeout(function(){
                         $("#success-msg").addClass("hide");
-                        $('#myModal').modal('hide');
+                        $('#addSucai').modal('hide');
                     }, 2000);
                 } else {
                     $("#error-msg").html("添加素材失败").removeClass("hide");
                     setTimeout(function(){
                         $("#error-msg").addClass("hide");
+                        $('#addSucai').modal('hide');
                     }, 2000);
                 }
             }
@@ -185,7 +199,7 @@ $(function () {
 //          url: "./otherlink.json",
 //          type:"get",
             data: JSON.stringify({
-				CZLX:"1", 
+				CZLX:"2", 
                 DYLX:"query",
 				YHID:localStorage.getItem("YHID"),
 				"SZ":{

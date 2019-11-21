@@ -80,7 +80,7 @@ $(function () {
                     "FWBH": $("#FWBH").val(),
                     "SCBM": $("#SCBM").val(),
 			    	"BWXS": $("#BWXS").val(),
-                    "LBSJ": new Date().getTime()
+                    "LBSJ": moment().format("YYYY-MM-DD HH:mm:ss")
 				},
                 "YHID": localStorage.getItem("YHID"),
                 "BMID": localStorage.getItem("BMID")
@@ -98,6 +98,7 @@ $(function () {
 					$("#error-msg").html("插入节点失败").removeClass("hide");
 					setTimeout(function(){
 						$("#error-msg").addClass("hide");
+                        $('#myModal').modal('hide');
 					}, 2000);
 				}
             }
