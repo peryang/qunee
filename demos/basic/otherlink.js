@@ -105,13 +105,13 @@ $(function () {
 					setTimeout(function(){
 						$("#success-msg").addClass("hide");
 						$('#addPro').modal('hide');
-					}, 2000);
+					}, 1000);
 				} else {
 					$("#error-msg").html("添加半成品失败").removeClass("hide");
 					setTimeout(function(){
 						$("#error-msg").addClass("hide");
                         $('#addPro').modal('hide');
-					}, 2000);
+					}, 1000);
 				}
             }
         });
@@ -148,13 +148,13 @@ $(function () {
                     setTimeout(function(){
                         $("#success-msg").addClass("hide");
                         $('#addSucai').modal('hide');
-                    }, 2000);
+                    }, 1000);
                 } else {
                     $("#error-msg").html("添加素材失败").removeClass("hide");
                     setTimeout(function(){
                         $("#error-msg").addClass("hide");
                         $('#addSucai').modal('hide');
-                    }, 2000);
+                    }, 1000);
                 }
             }
         });
@@ -181,12 +181,12 @@ $(function () {
                         $("#showResult .modal-body").html('QB唯一码：' + result.response_data.QBWYM || '空');
                         $('#getQBUUID').modal('hide');
                         $('#showResult').modal('show');
-                    }, 2000);
+                    }, 1000);
                 } else {
                     $("#error-msg").html("获取QB唯一码失败").removeClass("hide");
                     setTimeout(function(){
                         $("#error-msg").addClass("hide");
-                    }, 2000);
+                    }, 1000);
                 }
             }
         });
@@ -213,57 +213,59 @@ $(function () {
 					$("#success-msg").html("查询成功").removeClass("hide");
 					setTimeout(function(){
 						$("#success-msg").addClass("hide");
-					}, 2000);
-					var nodes = json.response_data.data.nodes;
-					var edges = json.response_data.data.edges;
-					var parseNodes = parseData(nodes);
-					var testArr = {};
-					var num = 1;
-					var level = 1;
-					for(var p = 0; p < parseNodes.length; p ++) {
-					    var i = parseNodes[p];
-						if (level != nodes[i].level) num = 1;
-						var newNode = createNode(nodes[i].name, 1000 - (nodes[i].level - 1) * 200, 1000 + 100 * num, nodes[i].images || "abc.png");
-						testArr[nodes[i].id] = newNode;
-						if (nodes[i].type === 'type1')
-						    newNode.tooltip = (nodes[i].DXQBWYM ? '<div class="tooltip-item">半成品QB唯一码: ' + nodes[i].DXQBWYM + '</div>' : '') +
-											(nodes[i].name ? '<div class="tooltip-item">副本名称: ' + nodes[i].name + '</div>' : '') +
-											(nodes[i].DXQBNM ? '<div class="tooltip-item">QB内码: ' + nodes[i].DXQBNM + '</div>' : '') +
-											(nodes[i].SJSJ ? '<div class="tooltip-item">修改时间: ' + nodes[i].SJSJ + '</div>' : '') +
-											(nodes[i].YHBH ? '<div class="tooltip-item">用户编号: ' + nodes[i].YHBH + '</div>' : '') +
-											(nodes[i].FBDX ? '<div class="tooltip-item">原件副本: ' + nodes[i].FBDX + '</div>' : '') +
-											(nodes[i].SFYFB ? '<div class="tooltip-item">是否有副本: ' + nodes[i].SFYFB + '</div>' : '') +
-											(nodes[i].JLBH ? '<div class="tooltip-item">修改记录: ' + nodes[i].JLBH + '</div>' : '') +
-                                            (nodes[i].ZWNR ? '<div class="tooltip-item">正文内容: ' + nodes[i].ZWNR + '</div>' : '') +
-											(nodes[i].XW ? '<div class="tooltip-item">席位: ' + nodes[i].XW + '</div>' : '');
-					    if (nodes[i].type === 'type2')
-                            newNode.tooltip = (nodes[i].DXQBWYM ? '<div class="tooltip-item">半成品QB唯一码: ' + nodes[i].DXQBWYM + '</div>' : '') +
-                                            (nodes[i].name ? '<div class="tooltip-item">数据标题: ' + nodes[i].name + '</div>' : '') +
-                                            (nodes[i].BCPTMDXQBNM ? '<div class="tooltip-item">半成品QB内码: ' + nodes[i].BCPTMDXQBNM + '</div>' : '') +
-                                            (nodes[i].SCTMDXQBWYM ? '<div class="tooltip-item">素材QB唯一码: ' + nodes[i].SCTMDXQBWYM + '</div>' : '') +
-                                            (nodes[i].SCTMDXQBNM ? '<div class="tooltip-item">素材QB内码: ' + nodes[i].SCTMDXQBNM + '</div>' : '') +
-                                            (nodes[i].QBLX ? '<div class="tooltip-item">情报类型: ' + nodes[i].QBLX + '</div>' : '') +
-                                            (nodes[i].LBSJ ? '<div class="tooltip-item">来报时间: ' + nodes[i].LBSJ + '</div>' : '') +
-                                            (nodes[i].SBDW ? '<div class="tooltip-item">上报单位: ' + nodes[i].SBDW + '</div>' : '') +
-                                            (nodes[i].FWBH ? '<div class="tooltip-item">发文编号: ' + nodes[i].FWBH + '</div>' : '') +
-                                            (nodes[i].BWXS ? '<div class="tooltip-item">报文形式: ' + nodes[i].BWXS + '</div>' : '');
-						newNode.yxwID = nodes[i].id;
-						level = nodes[i].level;
-						num ++;
-					}
-					for (var e = 0; e < edges.length;  e ++) {
-						createEdge("", testArr[edges[e].from], testArr[edges[e].to]);
-					}
-
-					var level2 = createNode("半成品溯源", 500, 1000);
-					level2.image = "";
-					
-					graph.moveToCenter(1);
+					}, 1000);
+					setTimeout(function(){
+                        var nodes = json.response_data.data.nodes;
+                        var edges = json.response_data.data.edges;
+                        var parseNodes = parseData(nodes);
+                        var testArr = {};
+                        var num = 1;
+                        var level = 1;
+                        for(var p = 0; p < parseNodes.length; p ++) {
+                            var i = parseNodes[p];
+                            if (level != nodes[i].level) num = 1;
+                            var newNode = createNode(nodes[i].name, 1000 - (nodes[i].level - 1) * 200, 1000 + 100 * num, nodes[i].images || "abc.png");
+                            testArr[nodes[i].id] = newNode;
+                            if (nodes[i].type === 'type1')
+                                newNode.tooltip = (nodes[i].DXQBWYM ? '<div class="tooltip-item">半成品QB唯一码: ' + nodes[i].DXQBWYM + '</div>' : '') +
+                                                (nodes[i].name ? '<div class="tooltip-item">副本名称: ' + nodes[i].name + '</div>' : '') +
+                                                (nodes[i].DXQBNM ? '<div class="tooltip-item">QB内码: ' + nodes[i].DXQBNM + '</div>' : '') +
+                                                (nodes[i].SJSJ ? '<div class="tooltip-item">修改时间: ' + nodes[i].SJSJ + '</div>' : '') +
+                                                (nodes[i].YHBH ? '<div class="tooltip-item">用户编号: ' + nodes[i].YHBH + '</div>' : '') +
+                                                (nodes[i].FBDX ? '<div class="tooltip-item">原件副本: ' + nodes[i].FBDX + '</div>' : '') +
+                                                (nodes[i].SFYFB ? '<div class="tooltip-item">是否有副本: ' + nodes[i].SFYFB + '</div>' : '') +
+                                                (nodes[i].JLBH ? '<div class="tooltip-item">修改记录: ' + nodes[i].JLBH + '</div>' : '') +
+                                                (nodes[i].ZWNR ? '<div class="tooltip-item">正文内容: ' + nodes[i].ZWNR + '</div>' : '') +
+                                                (nodes[i].XW ? '<div class="tooltip-item">席位: ' + nodes[i].XW + '</div>' : '');
+                            if (nodes[i].type === 'type2')
+                                newNode.tooltip = (nodes[i].DXQBWYM ? '<div class="tooltip-item">半成品QB唯一码: ' + nodes[i].DXQBWYM + '</div>' : '') +
+                                                (nodes[i].name ? '<div class="tooltip-item">数据标题: ' + nodes[i].name + '</div>' : '') +
+                                                (nodes[i].BCPTMDXQBNM ? '<div class="tooltip-item">半成品QB内码: ' + nodes[i].BCPTMDXQBNM + '</div>' : '') +
+                                                (nodes[i].SCTMDXQBWYM ? '<div class="tooltip-item">素材QB唯一码: ' + nodes[i].SCTMDXQBWYM + '</div>' : '') +
+                                                (nodes[i].SCTMDXQBNM ? '<div class="tooltip-item">素材QB内码: ' + nodes[i].SCTMDXQBNM + '</div>' : '') +
+                                                (nodes[i].QBLX ? '<div class="tooltip-item">情报类型: ' + nodes[i].QBLX + '</div>' : '') +
+                                                (nodes[i].LBSJ ? '<div class="tooltip-item">来报时间: ' + nodes[i].LBSJ + '</div>' : '') +
+                                                (nodes[i].SBDW ? '<div class="tooltip-item">上报单位: ' + nodes[i].SBDW + '</div>' : '') +
+                                                (nodes[i].FWBH ? '<div class="tooltip-item">发文编号: ' + nodes[i].FWBH + '</div>' : '') +
+                                                (nodes[i].BWXS ? '<div class="tooltip-item">报文形式: ' + nodes[i].BWXS + '</div>' : '');
+                            newNode.yxwID = nodes[i].id;
+                            level = nodes[i].level;
+                            num ++;
+                        }
+                        for (var e = 0; e < edges.length;  e ++) {
+                            createEdge("", testArr[edges[e].from], testArr[edges[e].to]);
+                        }
+    
+                        var level2 = createNode("半成品溯源", 500, 1000);
+                        level2.image = "";
+                        
+                        graph.moveToCenter(1);
+				    }, 1000);
 				} else {
 					$("#error-msg").html("获取数据失败").removeClass("hide");
 					setTimeout(function(){
 						$("#error-msg").addClass("hide");
-					}, 2000);
+					}, 1000);
 				}
             }
         });

@@ -40,14 +40,14 @@ $(function () {
 						setTimeout(function(){
 							$("#success-msg").addClass("hide");
 							window.location.href = "./demos/index.html";
-						}, 2000);
+						}, 1000);
 						localStorage.setItem("YHID", $("#loginYHID").val());
 						localStorage.setItem("BMID", $("#loginBMID").val());
 					} else {
 						$("#error-msg").html("登录失败").removeClass("hide");
 						setTimeout(function(){
 							$("#error-msg").addClass("hide");
-						}, 2000);
+						}, 1000);
 					}
                 }
             });
@@ -94,13 +94,13 @@ $(function () {
 						$("#success-msg").html("注册成功").removeClass("hide");
 						setTimeout(function(){
 							$("#success-msg").addClass("hide");
-						}, 2000);
+						}, 1000);
 						window.location.reload();
 					} else {
 						$("#error-msg").html("注册失败").removeClass("hide");
 						setTimeout(function(){
 							$("#error-msg").addClass("hide");
-						}, 2000);
+						}, 1000);
 					}
                 },
             });
