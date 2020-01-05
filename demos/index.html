@@ -8,13 +8,33 @@
 
     <link rel="stylesheet" href="js/bootstrap/bootstrap.min.css"/>
     <link rel="stylesheet" href="demo.css"/>
+    <style>
+        #myModal .modal-body {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body>
     
-<div style="padding-left: calc(50% - 300px);margin-top: 50px;">
-    <div class="search-item input-group">
-        <span class="input-group-addon" id="basic-addon1" style="width: 80px;">编码：</span>
-        <input id="inputSCBM" type="text" class="form-control" style="width: 300px;" placeholder="请输入编码" aria-describedby="basic-addon1">
+<div style="padding-left: calc(50% - 550px);margin-top: 50px;">
+    <div class="search-item input-group" style="margin-right: 20px;">
+        <select class="form-control" id="search_CZLX">
+            <option value="1" selected=true>产品</option>
+            <option value="4">素材</option>
+        </select>
+    </div>
+    <div class="search-item input-group" style="margin-right: 20px;">
+        <span class="input-group-addon" id="basic-addon1" style="width: 60px;">标题：</span>
+        <input id="search_BT" type="text" class="form-control" style="width: 200px;" placeholder="请输入标题" aria-describedby="basic-addon1">
+    </div>
+    <div class="search-item input-group" style="margin-right: 20px;">
+        <span class="input-group-addon" id="basic-addon1" style="width: 80px;">统计码：</span>
+        <input id="search_TJM" type="text" class="form-control" style="width: 200px;" placeholder="请输入统计码" aria-describedby="basic-addon1">
+    </div>
+    <div class="search-item input-group" style="margin-right: 20px;">
+        <span class="input-group-addon" id="basic-addon1" style="width: 80px;">发文编号：</span>
+        <input id="search_FWBH" type="text" class="form-control" style="width: 200px;" placeholder="请输入发文编号" aria-describedby="basic-addon1">
     </div>
     <button type="button" style="margin-left: 8px;width: 80px;" id="searchBtn" class="btn btn-default">搜索</button>
 </div>
@@ -27,7 +47,6 @@
 </button>
 
 <!-- 按钮触发模态框 -->
-<button class="btn btn-primary" data-toggle="modal" data-target="#getQBUUID" style="float: right;margin-right: 100px;margin-bottom: 40px;">获取QB唯一码</button>
 <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="float: right;margin-right: 30px;margin-bottom: 40px;">添加节点</button>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
@@ -39,12 +58,12 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>QB唯一码：</label>
-                    <input type="text" name="DXQBWYM" id="DXQBWYM" class="form-control" placeholder="输入QB唯一码">
+                    <label>QB内码：</label>
+                    <input type="text" name="DXQBNM" id="DXQBNM" class="form-control" placeholder="输入QB内码">
                 </div>
                 <div class="form-group">
-                    <label>QB类型：</label>
-                    <input type="text" name="QBLX" id="QBLX" class="form-control" placeholder="输入QB类型">
+                    <label>QB原内码：</label>
+                    <input type="text" name="DXQBYNM" id="DXQBYNM" class="form-control" placeholder="输入QB原内码">
                 </div>
                 <div class="form-group">
                     <label>标题：</label>
@@ -55,6 +74,10 @@
                     <input type="text" name="SBDW" id="SBDW" class="form-control" placeholder="输入上报单位">
                 </div>
                 <div class="form-group">
+                    <label>整编单位：</label>
+                    <input type="text" name="ZBDW" id="ZBDW" class="form-control" placeholder="输入整编单位">
+                </div>
+                <div class="form-group">
                     <label>评优：</label>
                     <input type="text" name="PY" id="PY" class="form-control" placeholder="输入评优">
                 </div>
@@ -63,42 +86,28 @@
                     <input type="text" name="FWBH" id="FWBH" class="form-control" placeholder="输入发文编号">
                 </div>
                 <div class="form-group">
+                    <label>报文形式：</label>
+                    <input type="text" name="BWXS" id="BWXS" class="form-control" placeholder="输入报文形式">
+                </div>
+                <div class="form-group">
                     <label>素材编码：</label>
                     <input type="text" name="SCBM" id="SCBM" class="form-control" placeholder="输入素材编码">
                 </div>
                 <div class="form-group">
-                    <label>QB内容：</label>
-                    <input type="text" name="BWXS" id="BWXS" class="form-control" placeholder="输入QB内容">
+                    <label>统计码：</label>
+                    <input type="text" name="TJM" id="TJM" class="form-control" placeholder="输入统计码">
+                </div>
+                <div class="form-group">
+                    <label>引用素材单位：</label>
+                    <input type="text" name="YYSCDW" id="YYSCDW" class="form-control" placeholder="输入引用素材单位">
+                </div>
+                <div class="form-group">
+                    <label>日志哈希：</label>
+                    <input type="text" name="LOGHASH" id="LOGHASH" class="form-control" placeholder="输入日志哈希">
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="modalSubmit">添加</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
-
-<!-- 模态框（Modal） -->
-<div class="modal fade" id="getQBUUID" tabindex="-1" role="dialog" aria-labelledby="getQBUUIDLabel" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="">获取QB唯一码</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>QB类型：</label>
-                    <input type="text" name="QBLX" id="QBLX" value="1" disabled class="form-control" placeholder="输入QB类型">
-                </div>
-                <div class="form-group">
-                    <label>QB内码：</label>
-                    <input type="text" name="QBNM" id="QBNM" class="form-control" placeholder="输入QB内码">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="getQBUUIDSubmit">确定</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div><!-- /.modal-content -->
@@ -121,21 +130,6 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="modal fade" id="showResult" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">QB唯一码</h4>
-            </div>
-            <div class="modal-body"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
 </div>
 	
 <div class="alert alert-success hide" role="alert" id="success-msg">正确</div>

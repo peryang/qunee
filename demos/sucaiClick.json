@@ -1,0 +1,80 @@
+{
+    "response_status": "0",
+    "response_data": {
+        "code": 1,
+        "data": {
+            "nodes": {
+                "node1": {
+                    "id": "node1",
+                    "qbwym": "157823195111000000110101",
+                    "QBLX": "1",
+                    "CPSC": "1",
+                    "SLSJ": "2020/1/5 21:51:00",
+                    "name": "部队产品68",
+                    "SBDW": "部队1",
+                    "ZBDW": "部队1",
+                    "PY": "评优",
+                    "FWBH": "68",
+                    "BWXS": "报文形式",
+                    "SCBM": "157823158611000000110101",
+                    "TJM": "buduicp68",
+                    "YYSCDW": "",
+                    "LOGHASH": "123456",
+                    "images": "image2",
+                    "type": "type2",
+                    "level": 4
+                },
+                "node2": {
+                    "id": "node2",
+                    "qbwym": "157823965311000000110100",
+                    "QBLX": "1",
+                    "CPSC": "1",
+                    "SLSJ": "2020/1/5 23:56:00",
+                    "BT": "分域产品88",
+                    "SBDW": "分域1",
+                    "ZBDW": "分域1",
+                    "PY": "评优",
+                    "FWBH": "88",
+                    "BWXS": "报文形式",
+                    "SCBM": "157823195111000000110101,157823217711000000110101",
+                    "TJM": "fenyucp88",
+                    "YYSCDW": "",
+                    "LOGHASH": "123456",
+                    "images": "image1",
+                    "type": "type1",
+                    "level": 3
+                },
+                "node3": {
+                    "id": "node3",
+                    "qbwym": "157823468011000000110100",
+                    "QBLX": "1",
+                    "CPSC": "1",
+                    "SLSJ": "2020/1/5 22:43:00",
+                    "BT": "分域产品79",
+                    "SBDW": "分域1",
+                    "ZBDW": "分域1",
+                    "PY": "评优",
+                    "FWBH": "79",
+                    "BWXS": "报文形式",
+                    "SCBM": "157823195111000000110101,157823208511000000110101",
+                    "TJM": "fenyucp71",
+                    "YYSCDW": "",
+                    "LOGHASH": "123456",
+                    "images": "image1",
+                    "type": "type1",
+                    "level": 3
+                }
+            },
+            "edges": [
+                {
+                    "from": "node1",
+                    "to": "node2"
+                },
+                {
+                    "from": "node1",
+                    "to": "node3"
+                }
+            ]
+        }
+    }
+}

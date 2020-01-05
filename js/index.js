@@ -43,6 +43,7 @@ $(function () {
 						}, 1000);
 						localStorage.setItem("YHID", $("#loginYHID").val());
 						localStorage.setItem("BMID", $("#loginBMID").val());
+						localStorage.setItem("BMJB", result.response_data.BMJB);
 					} else {
 						$("#error-msg").html("登录失败").removeClass("hide");
 						setTimeout(function(){

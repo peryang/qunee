@@ -11,10 +11,6 @@ graph.enableTooltip = true;
 graph.tooltipDelay = 0;
 graph.tooltipDuration = 10000;
 
-graph.ondblclick = function(evt){
-    Q.log('double click');
-}
-
 function createNode(name, x, y, image){
     var node = graph.createNode(name, x, y);
     if(image){
@@ -39,25 +35,40 @@ function createEdge(name, from, to, edgeType, color){
 }
 
 function clearForm() {
-    $("#DXQBWYM").val("");
-    $("#DXQBNM").val("");
-    $("#YHBH").val("");
+    $("#DXQBNM").val(""),
+    $("#YHBH").val(""),
     $('#FBDX').children('option').eq(0).prop('selected', true);
     $('#SFYFB').children('option').eq(0).prop('selected', true);
-    $("#FBMC").val("");
-    $("#JLBH").val("");
-    $("#ZWNR").val("");
-    $("#XW").val("");
+    $("#FBMC").val(""),
+    $("#JLBH").val(""),
+    $("#ZWNR").val(""),
+    $("#XW").val(""),
+    $("#SCBM").val(""),
+    $("#LOGHASH").val(""),
     
-    $("#SUCAIDXQBWYM").val("");
-    $("#SUCAIBCPTMDXQBNM").val("");
-    $("#SUCAISCTMDXQBWYM").val("");
-    $("#SUCAISCTMDXQBNM").val("");
-    $("#SUCAIQBLX").val("");
-    $("#SUCAIBT").val("");
-    $("#SUCAISBDW").val("");
-    $("#SUCAIBWXS").val("");
-    $("#SUCAIFWBH").val("");
+    $("#SucaiDXQBNM").val(""),
+    $("#SucaiBT").val(""),
+    $("#SucaiSBDW").val(""),
+    $("#SucaiZBDW").val(""),
+    $("#SucaiPY").val(""),
+    $("#SucaiFWBH").val(""),
+    $("#SucaiBWXS").val(""),
+    $("#SucaiSCBM").val(""),
+    $("#SucaiTJM").val(""),
+    $("#SucaiYYSCDW").val(""),
+    $("#SucaiLOGHASH").val(""),
+    
+    $("#UploadSCTMDXQBNM").val(""),
+    $("#UploadBT").val(""),
+    $("#UploadSBDW").val(""),
+    $("#UploadZBDW").val(""),
+    $("#UploadPY").val(""),
+    $("#UploadFWBH").val(""),
+    $("#UploadBWXS").val(""),
+    $("#UploadSCBM").val(""),
+    $("#UploadTJM").val(""),
+    $("#UploadYYSCDW").val(""),
+    $("#UploadLOGHASH").val(""),
 }
 
 function parseData(data) {
@@ -84,18 +95,20 @@ $(function () {
                 "DYLX":"insert",
                 "QBtype":"1",
 				"SZ":{
-					"DXQBWYM": $("#DXQBWYM").val(),
-                    "DXQBNM": $("#DXQBNM").val(),
+					"DXQBNM": $("#DXQBNM").val(),
                     "YHBH": $("#YHBH").val(),
                     "FBDX": $("#FBDX").val(),
                     "SFYFB": $("#SFYFB").val(),
                     "FBMC": $("#FBMC").val(),
                     "JLBH": $("#JLBH").val(),
                     "ZWNR": $("#ZWNR").val(),
-			    	"XW": $("#XW").val(),
+                    "XW": $("#XW").val(),
+                    "SCBM": $("#SCBM").val(),
+                    "LOGHASH": $("#LOGHASH").val(),
                     "SJSJ": moment().format("YYYY-MM-DD HH:mm:ss")
 				},
-                "YHID": localStorage.getItem("YHID")
+                "YHID": localStorage.getItem("YHID"),
+                "BMID": localStorage.getItem("BMID")
             }),
             dataType: "json",
             success: function(result) {
@@ -123,34 +136,39 @@ $(function () {
             type: "post",
             contentType: "application/json",
             data:JSON.stringify({
-                "CZLX":"2",
-                "DYLX":"insert",
-                "QBtype":"1",
+                "CZLX": "5",
+                "DYLX": "insert",
+                "QBtype": "1",
                 "SZ":{
-                    "DXQBWYM": $("#SUCAIDXQBWYM").val(),
-                    "BCPTMDXQBNM": $("#SUCAIBCPTMDXQBNM").val(),
-                    "SCTMDXQBWYM": $("#SUCAISCTMDXQBWYM").val(),
-                    "SCTMDXQBNM": $("#SUCAISCTMDXQBNM").val(),
-                    "QBLX": $("#SUCAIQBLX").val(),
-                    "BT": $("#SUCAIBT").val(),
-                    "SBDW": $("#SUCAISBDW").val(),
-                    "BWXS": $("#SUCAIBWXS").val(),
-                    "FWBH": $("#SUCAIFWBH").val(),
-                    "LBSJ": moment().format("YYYY-MM-DD HH:mm:ss")
+                    "DXQBNM": $("#SucaiDXQBNM").val(),
+                    "BT": $("#SucaiBT").val(),
+                    "SBDW": $("#SucaiSBDW").val(),
+                    "ZBDW": $("#SucaiZBDW").val(),
+                    "PY": $("#SucaiPY").val(),
+                    "FWBH": $("#SucaiFWBH").val(),
+                    "BWXS": $("#SucaiBWXS").val(),
+                    "SCBM": $("#SucaiSCBM").val(),
+                    "TJM": $("#SucaiTJM").val(),
+                    "YYSCDW": $("#SucaiYYSCDW").val(),
+                    "LOGHASH": $("#SucaiLOGHASH").val(),
+                    "QBLX": "1",
+                    "CPSC": "0",
+                    "SLSJ": moment().format("YYYY-MM-DD HH:mm:ss")
                 },
-                "YHID": localStorage.getItem("YHID")
+                "YHID": localStorage.getItem("YHID"),
+                "BMID": localStorage.getItem("BMID")
             }),
             dataType: "json",
             success: function(result) {
                 clearForm();
                 if(result.response_status == 0) {
-                    $("#success-msg").html("添加素材成功").removeClass("hide");
+                    $("#success-msg").html("添加本级素材成功").removeClass("hide");
                     setTimeout(function(){
                         $("#success-msg").addClass("hide");
                         $('#addSucai').modal('hide');
                     }, 1000);
                 } else {
-                    $("#error-msg").html("添加素材失败").removeClass("hide");
+                    $("#error-msg").html("添加本级素材失败").removeClass("hide");
                     setTimeout(function(){
                         $("#error-msg").addClass("hide");
                         $('#addSucai').modal('hide');
@@ -160,32 +178,48 @@ $(function () {
         });
     });
     
-    $("#getQBUUIDSubmit").click(function () {
+    $("#addUploadSucaiSubmit").click(function () {
         $.ajax({
             url: "/v1/chaincode/operation",
             type: "post",
             contentType: "application/json",
             data:JSON.stringify({
-                "DYLX":"create",
-                "QBLX":"1",
-                "QBNM": $("#QBNM").val(),
-                "YHID": localStorage.getItem("YHID")
+                "CZLX": "2",
+                "DYLX": "insert",
+                "QBtype": "1",
+                "SZ":{
+                    "SCTMDXQBNM": $("#UploadSCTMDXQBNM").val(),
+                    "BT": $("#UploadBT").val(),
+                    "SBDW": $("#UploadSBDW").val(),
+                    "ZBDW": $("#UploadZBDW").val(),
+                    "PY": $("#UploadPY").val(),
+                    "FWBH": $("#UploadFWBH").val(),
+                    "BWXS": $("#UploadBWXS").val(),
+                    "SCBM": $("#UploadSCBM").val(),
+                    "TJM": $("#UploadTJM").val(),
+                    "YYSCDW": $("#UploadYYSCDW").val(),
+                    "LOGHASH": $("#UploadLOGHASH").val(),
+                    "QBLX": "1",
+                    "CPSC": "0",
+                    "SLSJ": moment().format("YYYY-MM-DD HH:mm:ss")
+                },
+                "YHID": localStorage.getItem("YHID"),
+                "BMID": localStorage.getItem("BMID")
             }),
             dataType: "json",
             success: function(result) {
                 clearForm();
                 if(result.response_status == 0) {
-                    $("#success-msg").html("获取QB唯一码成功").removeClass("hide");
+                    $("#success-msg").html("添加上报素材成功").removeClass("hide");
                     setTimeout(function(){
                         $("#success-msg").addClass("hide");
-                        $("#showResult .modal-body").html('QB唯一码：' + result.response_data.QBWYM || '空');
-                        $('#getQBUUID').modal('hide');
-                        $('#showResult').modal('show');
+                        $('#addUploadSucai').modal('hide');
                     }, 1000);
                 } else {
-                    $("#error-msg").html("获取QB唯一码失败").removeClass("hide");
+                    $("#error-msg").html("添加上报素材失败").removeClass("hide");
                     setTimeout(function(){
                         $("#error-msg").addClass("hide");
+                        $('#addUploadSucai').modal('hide');
                     }, 1000);
                 }
             }
@@ -196,16 +230,15 @@ $(function () {
         $.ajax({
             url: "/v1/chaincode/operation",
             type:"post",
-//          url: "./otherlink.json",
-//          type:"get",
             data: JSON.stringify({
-				CZLX:"2", 
-                DYLX:"query",
-				YHID:localStorage.getItem("YHID"),
-				"SZ":{
-    				QDXBNM:"",
-                    QBWYM:$("#inputSCBM").val()
-				}
+				"CZLX": "2",
+                "DYLX": "query",
+                "YHID": localStorage.getItem("YHID"),
+                "SZ":{
+                    "BT": $("#search_BT").val() || "",
+                    "TJM": $("#search_TJM").val() || "",
+                    "FWBH": $("#search_FWBH").val() || ""
+                }
             }),
             dataType: "json",
             success: function(json) {
@@ -226,28 +259,22 @@ $(function () {
                             if (level != nodes[i].level) num = 1;
                             var newNode = createNode(nodes[i].name, 1000 - (nodes[i].level - 1) * 200, 1000 + 100 * num, nodes[i].images || "abc.png");
                             testArr[nodes[i].id] = newNode;
-                            if (nodes[i].type === 'type1')
-                                newNode.tooltip = (nodes[i].DXQBWYM ? '<div class="tooltip-item">半成品QB唯一码: ' + nodes[i].DXQBWYM + '</div>' : '') +
-                                                (nodes[i].name ? '<div class="tooltip-item">副本名称: ' + nodes[i].name + '</div>' : '') +
-                                                (nodes[i].DXQBNM ? '<div class="tooltip-item">QB内码: ' + nodes[i].DXQBNM + '</div>' : '') +
-                                                (nodes[i].SJSJ ? '<div class="tooltip-item">修改时间: ' + nodes[i].SJSJ + '</div>' : '') +
-                                                (nodes[i].YHBH ? '<div class="tooltip-item">用户编号: ' + nodes[i].YHBH + '</div>' : '') +
-                                                (nodes[i].FBDX ? '<div class="tooltip-item">原件副本: ' + nodes[i].FBDX + '</div>' : '') +
-                                                (nodes[i].SFYFB ? '<div class="tooltip-item">是否有副本: ' + nodes[i].SFYFB + '</div>' : '') +
+                            if (nodes[i].type === '1' || nodes[i].type === '2')
+                                newNode.tooltip = (nodes[i].name ? '<div class="tooltip-item">标题: ' + nodes[i].name + '</div>' : '') +
+                                                (nodes[i].SBDW ? '<div class="tooltip-item">上报单位: ' + nodes[i].SBDW + '</div>' : '') +
+                                                (nodes[i].ZBDW ? '<div class="tooltip-item">整编单位: ' + nodes[i].ZBDW + '</div>' : '') +
+                                                (nodes[i].PY ? '<div class="tooltip-item">评优: ' + nodes[i].PY + '</div>' : '') +
+                                                (nodes[i].FWBH ? '<div class="tooltip-item">发文编号: ' + nodes[i].FWBH + '</div>' : '') +
+                                                (nodes[i].BWXS ? '<div class="tooltip-item">报文形式: ' + nodes[i].BWXS + '</div>' : '') +
+                                                (nodes[i].TJM ? '<div class="tooltip-item">统计码: ' + nodes[i].TJM + '</div>' : '') +
+                                                (nodes[i].YYSCDW ? '<div class="tooltip-item">引用素材单位: ' + nodes[i].YYSCDW + '</div>' : '');
+                            if (nodes[i].type === '3')
+                                newNode.tooltip = (nodes[i].name ? '<div class="tooltip-item">副本名称: ' + nodes[i].name + '</div>' : '') +
+                                                (nodes[i].SFYFB ? '<div class="tooltip-item">是否有副本: ' + (nodes[i].SFYFB ? "有" : "没有") + '</div>' : '') +
                                                 (nodes[i].JLBH ? '<div class="tooltip-item">修改记录: ' + nodes[i].JLBH + '</div>' : '') +
                                                 (nodes[i].ZWNR ? '<div class="tooltip-item">正文内容: ' + nodes[i].ZWNR + '</div>' : '') +
-                                                (nodes[i].XW ? '<div class="tooltip-item">席位: ' + nodes[i].XW + '</div>' : '');
-                            if (nodes[i].type === 'type2')
-                                newNode.tooltip = (nodes[i].DXQBWYM ? '<div class="tooltip-item">半成品QB唯一码: ' + nodes[i].DXQBWYM + '</div>' : '') +
-                                                (nodes[i].name ? '<div class="tooltip-item">数据标题: ' + nodes[i].name + '</div>' : '') +
-                                                (nodes[i].BCPTMDXQBNM ? '<div class="tooltip-item">半成品QB内码: ' + nodes[i].BCPTMDXQBNM + '</div>' : '') +
-                                                (nodes[i].SCTMDXQBWYM ? '<div class="tooltip-item">素材QB唯一码: ' + nodes[i].SCTMDXQBWYM + '</div>' : '') +
-                                                (nodes[i].SCTMDXQBNM ? '<div class="tooltip-item">素材QB内码: ' + nodes[i].SCTMDXQBNM + '</div>' : '') +
-                                                (nodes[i].QBLX ? '<div class="tooltip-item">情报类型: ' + nodes[i].QBLX + '</div>' : '') +
-                                                (nodes[i].LBSJ ? '<div class="tooltip-item">来报时间: ' + nodes[i].LBSJ + '</div>' : '') +
-                                                (nodes[i].SBDW ? '<div class="tooltip-item">上报单位: ' + nodes[i].SBDW + '</div>' : '') +
-                                                (nodes[i].FWBH ? '<div class="tooltip-item">发文编号: ' + nodes[i].FWBH + '</div>' : '') +
-                                                (nodes[i].BWXS ? '<div class="tooltip-item">报文形式: ' + nodes[i].BWXS + '</div>' : '');
+                                                (nodes[i].XW ? '<div class="tooltip-item">席位: ' + nodes[i].XW + '</div>' : '') +
+                                                (nodes[i].SJSJ ? '<div class="tooltip-item">提交时间: ' + nodes[i].SJSJ + '</div>' : '');
                             newNode.yxwID = nodes[i].id;
                             level = nodes[i].level;
                             num ++;
@@ -279,7 +306,7 @@ $(function () {
         clearForm();
     });
     
-    $('#getQBUUID').on('hide.bs.modal', function () {
+    $('#addUploadSucai').on('hide.bs.modal', function () {
         clearForm();
     });
 });

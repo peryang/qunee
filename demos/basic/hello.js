@@ -16,21 +16,64 @@ graph.tooltipDelay = 0;
 graph.tooltipDuration = 10000;
 
 graph.ondblclick = function(evt){
-    var yxwType = evt.getData().yxwType;
+    var nodeData = evt.getData() || {};
+    var url = "";
+    var CZLX = "";
+    if (nodeData.CPSC === "1") {
+        url = "./chanpinClick.json";
+        CZLX = "1";
+    } else if (nodeData.CPSC === "0") {
+        url = "./sucaiClick.json";
+        CZLX = "4";
+    }
+    render(url, {
+        "CZLX": CZLX,
+        "DYLX": "query",
+        "YHID": localStorage.getItem("YHID"),
+        "BMID": localStorage.getItem("BMID"),
+        "SZ":{
+            "BT": nodeData.BT || "",
+            "TJM": nodeData.TJM || "",
+            "FWBH": nodeData.FWBH || "",
+            "LEVEL": nodeData.level || "",
+            "BMJB": localStorage.getItem("BMJB")
+        }
+    });
+}
+
+function drawEnv() {
+    var enode11 = createNode("enode11", "", 700, 900);
+    if (enode11) enode11.image = "";
+    var enode12 = createNode("enode12", "", 700, 1300);
+    if (enode12) enode12.image = "";
+    
+    var enode21 = createNode("enode21", "", 300, 900);
+    if (enode21) enode21.image = "";
+    var enode22 = createNode("enode22", "", 300, 1300);
+    if (enode22) enode22.image = "";
+    
+    if (enode11 && enode12 && checkEdge("enode11", "enode12")) createEdge("", enode11, enode12, null, "rgba(0, 0, 0, .1)");
+    if (enode21 && enode22 && checkEdge("enode21", "enode22")) createEdge("", enode21, enode22, null, "rgba(0, 0, 0, .1)");
+    
+    var level1 = createNode("level1ZQ", "ZQ", 900, 1000);
+    if (level1) level1.image = "";
+    
+    var level2 = createNode("level2ZQFY", "ZQFY", 500, 1000);
+    if (level2) level2.image = "";
+    
+    var level3 = createNode("level3BD", "BD", 100, 1000);
+    if (level3) level3.image = "";
+    
+    graph.moveToCenter(1);
+}
+
+function render(url, data) {
     $.ajax({
-        // url: "/v1/chaincode/operation",
-        // type:"post",
-        url: "./login1.json",
-        type:"get",
-        data: JSON.stringify({
-            CZLX:"1", 
-            DYLX:"query",
-            YHID:localStorage.getItem("YHID"),
-            "SZ":{
-            QDXBNM:"",
-            QBWYM:$("#inputSCBM").val()
-            }
-        }),
+       url: "/v1/chaincode/operation",
+       type:"post",
+//      url: url,
+//      type:"get",
+        data: JSON.stringify(data),
         dataType: "json",
         success: function(json) {
             if(json.response_status == 0) {
@@ -39,27 +82,33 @@ graph.ondblclick = function(evt){
                     $("#success-msg").addClass("hide");
                 }, 1000);
                 setTimeout(function(){
-                    var nodes = json.response_data.data.nodes;
-                    var edges = json.response_data.data.edges;
+                    var switchData = switchParseData(json.response_data.data);
+                    var nodes = switchData.nodes;
+                    var edges = switchData.edges;
+                    
                     var parseNodes = parseData(nodes);
                     var level = 1;
-                    var num = levelMap[level] + 1;
+                    var num = (levelMap[level] || 0) + 1;
                     for(var p = 0; p < parseNodes.length; p ++) {
                         var i = parseNodes[p];
-                        if (level != nodes[i].level) num = levelMap[nodes[i].level] + 1;
-                        var newNode = createNode(nodes[i].id, nodes[i].id, 1000 - (nodes[i].level - 1) * 200, 1000 + 100 * num, nodes[i].images || "abc.png");
+                        if (level != nodes[i].level) num = (levelMap[nodes[i].level] || 0) + 1;
+                        var newNode = createNode(nodes[i].id, nodes[i].name, 1000 - (nodes[i].level - 1) * 200, 1000 + 100 * num, nodes[i].images || "abc.png");
                         if (newNode) {
-                            newNode.tooltip = (nodes[i].qbwym ? '<div class="tooltip-item">QB唯一码: ' + nodes[i].qbwym + '</div>' : '') +
-                                                (nodes[i].name ? '<div class="tooltip-item">标题: ' + nodes[i].name + '</div>' : '') +
-                                                (nodes[i].QBLX ? '<div class="tooltip-item">情报类型: ' + nodes[i].QBLX + '</div>' : '') +
-                                                (nodes[i].LBSJ ? '<div class="tooltip-item">来报时间: ' + nodes[i].LBSJ + '</div>' : '') +
+                            newNode.tooltip = (nodes[i].name ? '<div class="tooltip-item">标题: ' + nodes[i].name + '</div>' : '') +
                                                 (nodes[i].SBDW ? '<div class="tooltip-item">上报单位: ' + nodes[i].SBDW + '</div>' : '') +
+                                                (nodes[i].ZBDW ? '<div class="tooltip-item">整编单位: ' + nodes[i].ZBDW + '</div>' : '') +
                                                 (nodes[i].PY ? '<div class="tooltip-item">评优: ' + nodes[i].PY + '</div>' : '') +
-                                                (nodes[i].FWBH ? '<div class="tooltip-item">发文标号: ' + nodes[i].FWBH + '</div>' : '') +
-                                                (nodes[i].BWXS ? '<div class="tooltip-item">值: ' + nodes[i].BWXS + '</div>' : '');
-                            newNode.yxwID = nodes[i].id;
-                            newNode.yxwType = nodes[i].id;
+                                                (nodes[i].FWBH ? '<div class="tooltip-item">发文编号: ' + nodes[i].FWBH + '</div>' : '') +
+                                                (nodes[i].BWXS ? '<div class="tooltip-item">报文形式: ' + nodes[i].BWXS + '</div>' : '') +
+                                                (nodes[i].TJM ? '<div class="tooltip-item">统计码: ' + nodes[i].TJM + '</div>' : '') +
+                                                (nodes[i].YYSCDW ? '<div class="tooltip-item">引用素材单位: ' + nodes[i].YYSCDW + '</div>' : '');
+                            newNode.CPSC = nodes[i].CPSC;
+                            newNode.BT = nodes[i].BT;
+                            newNode.TJM = nodes[i].TJM;
+                            newNode.FWBH = nodes[i].FWBH;
+                            newNode.level = nodes[i].level;
                             level = nodes[i].level;
+                            levelMap[level] = num;
                             num ++;
                         }
                     }
@@ -84,7 +133,8 @@ graph.ondblclick = function(evt){
 
 function checkEdge(from, to) {
     for (var i = 0; i < allEdges.length; i ++) {
-        if (allEdges[i].from == from && allEdges[i].to == to) {
+        if ((allEdges[i].from == from && allEdges[i].to == to)
+            || (allEdges[i].from == to && allEdges[i].to == from)) {
             return false;
         }
     }
@@ -103,6 +153,7 @@ function createNode(id, name, x, y, image){
     allNode[id] = node;
     return node;
 }
+
 function createEdge(name, from, to, edgeType, color){
     var edge = graph.createEdge(name, from, to);
     edge.setStyle(Q.Styles.LABEL_RADIUS, 0);
@@ -129,6 +180,32 @@ function clearForm() {
 	$("#BWXS").val("");
 }
 
+function switchParseData(data) {
+    var nodes2uuid = {};
+    var nodes = {};
+    for (var i in data.nodes) {
+        if (data.nodes[i].qbwym && data.nodes[i].level) {
+            var newUUID = data.nodes[i].qbwym + "_" + data.nodes[i].level;
+            data.nodes[i].id = newUUID;
+            nodes[newUUID] = data.nodes[i];
+            nodes2uuid[i] = newUUID;
+        }
+    }
+    var edges = [];
+    for (var e = 0; e < data.edges.length;  e ++) {
+        if (nodes2uuid[data.edges[e].from] && nodes2uuid[data.edges[e].to]) {
+            edges.push({
+                from: nodes2uuid[data.edges[e].from],
+                to: nodes2uuid[data.edges[e].to]
+            });
+        }
+    }
+    return {
+        nodes: nodes,
+        edges: edges
+    };
+}
+
 function parseData(data) {
     var result = [];
     var json = {};
@@ -143,25 +220,33 @@ function parseData(data) {
 }
 
 $(function () {
+    drawEnv();
+    
     $("#modalSubmit").click(function () {
         $.ajax({
             url: "/v1/chaincode/operation",
             type: "post",
             contentType: "application/json",
             data:JSON.stringify({
-                "CZLX":"4",
-                "DYLX":"insert",
-                "QBtype":"1",
+                "CZLX": "4",
+                "DYLX": "insert",
+                "QBtype": "1",
 				"SZ":{
-					"DXQBWYM": $("#DXQBWYM").val(),
-                    "QBLX": $("#QBLX").val(),
+					"DXQBNM": $("#DXQBNM").val(),
+					"DXQBYNM": $("#DXQBYNM").val(),
                     "BT": $("#BT").val(),
                     "SBDW": $("#SBDW").val(),
+                    "ZBDW": $("#ZBDW").val(),
                     "PY": $("#PY").val(),
                     "FWBH": $("#FWBH").val(),
+                    "BWXS": $("#BWXS").val(),
                     "SCBM": $("#SCBM").val(),
-			    	"BWXS": $("#BWXS").val(),
-                    "LBSJ": moment().format("YYYY-MM-DD HH:mm:ss")
+                    "TJM": $("#TJM").val(),
+			    	"YYSCDW": $("#YYSCDW").val(),
+			    	"LOGHASH": $("#LOGHASH").val(),
+                    "QBLX": "1",
+                    "CPSC": "1",
+                    "SLSJ": moment().format("YYYY-MM-DD HH:mm:ss")
 				},
                 "YHID": localStorage.getItem("YHID"),
                 "BMID": localStorage.getItem("BMID")
@@ -186,122 +271,18 @@ $(function () {
         });
     });
     
-    $("#getQBUUIDSubmit").click(function () {
-        $.ajax({
-            url: "/v1/chaincode/operation",
-            type: "post",
-            contentType: "application/json",
-            data:JSON.stringify({
-                "DYLX":"create",
-                "QBLX":"1",
-                "QBNM": $("#QBNM").val(),
-                "YHID": localStorage.getItem("YHID")
-            }),
-            dataType: "json",
-            success: function(result) {
-                clearForm();
-                if(result.response_status == 0) {
-                    $("#success-msg").html("获取QB唯一码成功").removeClass("hide");
-                    setTimeout(function(){
-                        $("#success-msg").addClass("hide");
-                        $("#showResult .modal-body").html('QB唯一码：' + result.response_data.QBWYM || '空');
-                        $('#getQBUUID').modal('hide');
-                        $('#showResult').modal('show');
-                    }, 1000);
-                } else {
-                    $("#error-msg").html("获取QB唯一码失败").removeClass("hide");
-                    setTimeout(function(){
-                        $("#error-msg").addClass("hide");
-                    }, 1000);
-                }
-            }
-        });
-    });
-    
     $("#searchBtn").click(function () {
-        $.ajax({
-            // url: "/v1/chaincode/operation",
-            // type:"post",
-            url: "./login.json",
-            type:"get",
-            data: JSON.stringify({
-				CZLX:"1", 
-                DYLX:"query",
-				YHID:localStorage.getItem("YHID"),
-				"SZ":{
-				QDXBNM:"",
-                QBWYM:$("#inputSCBM").val()
-				}
-            }),
-            dataType: "json",
-            success: function(json) {
-				if(json.response_status == 0) {
-					$("#success-msg").html("查询成功").removeClass("hide");
-					setTimeout(function(){
-						$("#success-msg").addClass("hide");
-					}, 1000);
-					setTimeout(function(){
-                        var nodes = json.response_data.data.nodes;
-                        var edges = json.response_data.data.edges;
-                        var parseNodes = parseData(nodes);
-                        var num = 1;
-                        var level = 1;
-                        for(var p = 0; p < parseNodes.length; p ++) {
-                            var i = parseNodes[p];
-                            if (level != nodes[i].level) num = 1;
-                            var newNode = createNode(nodes[i].id, nodes[i].id, 1000 - (nodes[i].level - 1) * 200, 1000 + 100 * num, nodes[i].images || "abc.png");
-                            if (newNode) {
-                                newNode.tooltip = (nodes[i].qbwym ? '<div class="tooltip-item">QB唯一码: ' + nodes[i].qbwym + '</div>' : '') +
-                                                    (nodes[i].name ? '<div class="tooltip-item">标题: ' + nodes[i].name + '</div>' : '') +
-                                                    (nodes[i].QBLX ? '<div class="tooltip-item">情报类型: ' + nodes[i].QBLX + '</div>' : '') +
-                                                    (nodes[i].LBSJ ? '<div class="tooltip-item">来报时间: ' + nodes[i].LBSJ + '</div>' : '') +
-                                                    (nodes[i].SBDW ? '<div class="tooltip-item">上报单位: ' + nodes[i].SBDW + '</div>' : '') +
-                                                    (nodes[i].PY ? '<div class="tooltip-item">评优: ' + nodes[i].PY + '</div>' : '') +
-                                                    (nodes[i].FWBH ? '<div class="tooltip-item">发文标号: ' + nodes[i].FWBH + '</div>' : '') +
-                                                    (nodes[i].BWXS ? '<div class="tooltip-item">值: ' + nodes[i].BWXS + '</div>' : '');
-                                newNode.yxwID = nodes[i].id;
-                                newNode.yxwType = nodes[i].id;
-                                level = nodes[i].level;
-                                levelMap[level] = num;
-                                num ++;
-                            }
-                        }
-                        for (var e = 0; e < edges.length;  e ++) {
-                            if (allNode[edges[e].from] && allNode[edges[e].to] && checkEdge(edges[e].from, edges[e].to)) {
-                                createEdge("", allNode[edges[e].from], allNode[edges[e].to]);
-                                allEdges.push(edges[e]);
-                            }
-                        }
-                        var enode11 = createNode("enode11", "", 700, 900);
-                        if (enode11) enode11.image = "";
-                        var enode12 = createNode("enode12", "", 700, 1300);
-                        if (enode12) enode12.image = "";
-                        
-                        var enode21 = createNode("enode21", "", 300, 900);
-                        if (enode21) enode21.image = "";
-                        var enode22 = createNode("enode22", "", 300, 1300);
-                        if (enode22) enode22.image = "";
-                        
-                        if (enode11 && enode12 && checkEdge("enode11", "enode12")) createEdge("", enode11, enode12, null, "rgba(0, 0, 0, .1)");
-                        if (enode21 && enode22 && checkEdge("enode21", "enode22")) createEdge("", enode21, enode22, null, "rgba(0, 0, 0, .1)");
-                        
-                        var level1 = createNode("level1ZQ", "ZQ", 900, 1000);
-                        if (level1) level1.image = "";
-                        
-                        var level2 = createNode("level2ZQFY", "ZQFY", 500, 1000);
-                        if (level2) level2.image = "";
-                        
-                        var level3 = createNode("level3BD", "BD", 100, 1000);
-                        if (level3) level3.image = "";
-                        
-                        graph.moveToCenter(1);
-                    }, 1000);
-				} else {
-					$("#error-msg").html("获取数据失败").removeClass("hide");
-					setTimeout(function(){
-						$("#error-msg").addClass("hide");
-					}, 1000);
-				}
+        render("./indexSearch.json", {
+            "CZLX": $("#search_CZLX").val(),
+            "DYLX": "query",
+            "YHID": localStorage.getItem("YHID"),
+            "BMID": localStorage.getItem("BMID"),
+            "SZ":{
+                "BT": $("#search_BT").val() || "",
+                "TJM": $("#search_TJM").val() || "",
+                "FWBH": $("#search_FWBH").val() || "",
+                "LEVEL": "",
+                "BMJB": localStorage.getItem("BMJB")
             }
         });
     });
