@@ -184,7 +184,7 @@ header.navbar {
   position: relative;
 }
 #graph_panel {
-  height: 900px;
+  height: 800px;
 }
 #canvas {
   outline: none;

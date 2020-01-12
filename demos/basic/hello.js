@@ -19,10 +19,10 @@ graph.ondblclick = function(evt){
     var nodeData = evt.getData() || {};
     var url = "";
     var CZLX = "";
-    if (nodeData.CPSC === "1") {
+    if (nodeData.type === "type1") {
         url = "./chanpinClick.json";
         CZLX = "1";
-    } else if (nodeData.CPSC === "0") {
+    } else if (nodeData.type === "type2") {
         url = "./sucaiClick.json";
         CZLX = "4";
     }
@@ -69,10 +69,10 @@ function drawEnv() {
 
 function render(url, data) {
     $.ajax({
-       url: "/v1/chaincode/operation",
-       type:"post",
-//      url: url,
-//      type:"get",
+   //   url: "/v1/chaincode/operation",
+   //   type:"post",
+      url: url,
+      type:"get",
         data: JSON.stringify(data),
         dataType: "json",
         success: function(json) {
@@ -102,8 +102,8 @@ function render(url, data) {
                                                 (nodes[i].BWXS ? '<div class="tooltip-item">报文形式: ' + nodes[i].BWXS + '</div>' : '') +
                                                 (nodes[i].TJM ? '<div class="tooltip-item">统计码: ' + nodes[i].TJM + '</div>' : '') +
                                                 (nodes[i].YYSCDW ? '<div class="tooltip-item">引用素材单位: ' + nodes[i].YYSCDW + '</div>' : '');
-                            newNode.CPSC = nodes[i].CPSC;
-                            newNode.BT = nodes[i].BT;
+                            newNode.type= nodes[i].type;
+                            newNode.BT = nodes[i].name;
                             newNode.TJM = nodes[i].TJM;
                             newNode.FWBH = nodes[i].FWBH;
                             newNode.level = nodes[i].level;
@@ -281,7 +281,7 @@ $(function () {
                 "BT": $("#search_BT").val() || "",
                 "TJM": $("#search_TJM").val() || "",
                 "FWBH": $("#search_FWBH").val() || "",
-                "LEVEL": "",
+                "LEVEL": 0,
                 "BMJB": localStorage.getItem("BMJB")
             }
         });

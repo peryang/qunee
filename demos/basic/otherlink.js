@@ -259,7 +259,7 @@ $(function () {
                             if (level != nodes[i].level) num = 1;
                             var newNode = createNode(nodes[i].name, 1000 - (nodes[i].level - 1) * 200, 1000 + 100 * num, nodes[i].images || "abc.png");
                             testArr[nodes[i].id] = newNode;
-                            if (nodes[i].type === '1' || nodes[i].type === '2')
+                            if (nodes[i].type === "type1" || nodes[i].type === "type2")
                                 newNode.tooltip = (nodes[i].name ? '<div class="tooltip-item">标题: ' + nodes[i].name + '</div>' : '') +
                                                 (nodes[i].SBDW ? '<div class="tooltip-item">上报单位: ' + nodes[i].SBDW + '</div>' : '') +
                                                 (nodes[i].ZBDW ? '<div class="tooltip-item">整编单位: ' + nodes[i].ZBDW + '</div>' : '') +
@@ -268,7 +268,7 @@ $(function () {
                                                 (nodes[i].BWXS ? '<div class="tooltip-item">报文形式: ' + nodes[i].BWXS + '</div>' : '') +
                                                 (nodes[i].TJM ? '<div class="tooltip-item">统计码: ' + nodes[i].TJM + '</div>' : '') +
                                                 (nodes[i].YYSCDW ? '<div class="tooltip-item">引用素材单位: ' + nodes[i].YYSCDW + '</div>' : '');
-                            if (nodes[i].type === '3')
+                            if (nodes[i].type === "type3")
                                 newNode.tooltip = (nodes[i].name ? '<div class="tooltip-item">副本名称: ' + nodes[i].name + '</div>' : '') +
                                                 (nodes[i].SFYFB ? '<div class="tooltip-item">是否有副本: ' + (nodes[i].SFYFB ? "有" : "没有") + '</div>' : '') +
                                                 (nodes[i].JLBH ? '<div class="tooltip-item">修改记录: ' + nodes[i].JLBH + '</div>' : '') +
