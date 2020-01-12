@@ -35,40 +35,40 @@ function createEdge(name, from, to, edgeType, color){
 }
 
 function clearForm() {
-    $("#DXQBNM").val(""),
-    $("#YHBH").val(""),
+    $("#DXQBNM").val("");
+    $("#YHBH").val("");
     $('#FBDX').children('option').eq(0).prop('selected', true);
     $('#SFYFB').children('option').eq(0).prop('selected', true);
-    $("#FBMC").val(""),
-    $("#JLBH").val(""),
-    $("#ZWNR").val(""),
-    $("#XW").val(""),
-    $("#SCBM").val(""),
-    $("#LOGHASH").val(""),
+    $("#FBMC").val("");
+    $("#JLBH").val("");
+    $("#ZWNR").val("");
+    $("#XW").val("");
+    $("#SCBM").val("");
+    $("#LOGHASH").val("");
     
-    $("#SucaiDXQBNM").val(""),
-    $("#SucaiBT").val(""),
-    $("#SucaiSBDW").val(""),
-    $("#SucaiZBDW").val(""),
-    $("#SucaiPY").val(""),
-    $("#SucaiFWBH").val(""),
-    $("#SucaiBWXS").val(""),
-    $("#SucaiSCBM").val(""),
-    $("#SucaiTJM").val(""),
-    $("#SucaiYYSCDW").val(""),
-    $("#SucaiLOGHASH").val(""),
+    $("#SucaiDXQBNM").val("");
+    $("#SucaiBT").val("");
+    $("#SucaiSBDW").val("");
+    $("#SucaiZBDW").val("");
+    $("#SucaiPY").val("");
+    $("#SucaiFWBH").val("");
+    $("#SucaiBWXS").val("");
+    $("#SucaiSCBM").val("");
+    $("#SucaiTJM").val("");
+    $("#SucaiYYSCDW").val("");
+    $("#SucaiLOGHASH").val("");
     
-    $("#UploadSCTMDXQBNM").val(""),
-    $("#UploadBT").val(""),
-    $("#UploadSBDW").val(""),
-    $("#UploadZBDW").val(""),
-    $("#UploadPY").val(""),
-    $("#UploadFWBH").val(""),
-    $("#UploadBWXS").val(""),
-    $("#UploadSCBM").val(""),
-    $("#UploadTJM").val(""),
-    $("#UploadYYSCDW").val(""),
-    $("#UploadLOGHASH").val(""),
+    $("#UploadSCTMDXQBNM").val("");
+    $("#UploadBT").val("");
+    $("#UploadSBDW").val("");
+    $("#UploadZBDW").val("");
+    $("#UploadPY").val("");
+    $("#UploadFWBH").val("");
+    $("#UploadBWXS").val("");
+    $("#UploadSCBM").val("");
+    $("#UploadTJM").val("");
+    $("#UploadYYSCDW").val("");
+    $("#UploadLOGHASH").val("");
 }
 
 function parseData(data) {
