@@ -58,6 +58,15 @@ myChart.setOption({
     }
 });
 
+function initChart() {
+    allNodeMap = {};
+    allNodes = [];
+    allNodeID = [];
+    allEdges = [];
+    levelMap = {};
+    myChart.setOption({series: {data: allNodes, links: allEdges}});
+}
+
 function render(url, data) {
     $.ajax({
         url: "/v1/chaincode/operation",
@@ -171,12 +180,9 @@ function switchParseData(data) {
     var nodes2uuid = {};
     var nodes = {};
     for (var i in data.nodes) {
-        if (data.nodes[i].qbwym && data.nodes[i].level) {
-            var newUUID = data.nodes[i].qbwym + "_" + data.nodes[i].level;
-            data.nodes[i].id = newUUID;
-            nodes[newUUID] = data.nodes[i];
-            nodes2uuid[i] = newUUID;
-        }
+        data.nodes[i].id = i;
+        nodes[i] = data.nodes[i];
+        nodes2uuid[i] = i;
     }
     var edges = [];
     for (var e = 0; e < data.edges.length;  e ++) {
@@ -349,6 +355,7 @@ $(function () {
     });
     
     $("#searchBtn").click(function () {
+        initChart();
         render("./indexSearch.json", {
             "CZLX": "2",
             "DYLX": "query",
