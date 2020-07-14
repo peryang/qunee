@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+		<title>查询</title>
+		<link rel="stylesheet" href="js/bootstrap/bootstrap.min.css" />
+		<link rel="stylesheet" href="lib/datatable/jquery.dataTables.min.css" />
+		<link rel="stylesheet" type="text/css" href="lib/daterangepicker.css"/>
+		<link rel="stylesheet" href="demo.css" />
+		<style>
+			.table-hover>tbody>tr:hover>td,
+			.table-hover>tbody>tr:hover>th {
+				background-color: white;
+			}
+			
+			#graph_panel {
+				height: auto;
+			}
+			
+			table.dataTable {
+				text-align: center;
+			}
+			
+			table.dataTable tbody {
+				display: table-footer-group;
+			}
+			
+			table.dataTable tbody th,
+			table.dataTable tbody td {
+				padding: 3px 10px;
+			}
+			
+			table.dataTable thead th {
+				text-align: center;
+			}
+			
+			table.dataTable tr {
+				line-height: 32px;
+			}
+			
+			table.dataTable tr.odd {
+				background-color: white;
+			}
+			
+			table.dataTable tr.even {
+				background-color: #EEEEEE;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div style="padding-left: calc(50% - 550px);margin-top: 50px;">
+			<div class="search-item input-group" style="margin-right: 20px;">
+				<span class="input-group-addon" id="basic-addon1" style="width: 60px;">类型：</span>
+				<select class="form-control" id="search_CZLX">
+					<option value="7" selected=true>7</option>
+					<option value="8">8</option>
+				</select>
+			</div>
+			<div id="search_FINDKEY_c" class="search-item input-group" style="margin-right: 20px;">
+				<span class="input-group-addon" id="basic-addon1" style="width: 60px;">可查询KEY：</span>
+				<select class="form-control" id="search_FINDKEY">
+					<option value="bt" selected=true>标题</option>
+					<option value="qblx">QB类型</option>
+					<option value="sbdw">上报单位</option>
+				</select>
+			</div>
+			<div id="search_FINDVALUE_c" class="search-item input-group" style="margin-right: 20px;">
+				<span class="input-group-addon" id="basic-addon1" style="width: 80px;">属性值：</span>
+				<input id="search_FINDVALUE" type="text" class="form-control" style="width: 200px;" placeholder="请输入属性值search_CZLX" aria-describedby="basic-addon1">
+			</div>
+			<div id="search_Date_c" class="search-item input-group hide" style="margin-right: 20px;">
+				<span class="input-group-addon" id="basic-addon1" style="width: 80px;">时间区间：</span>
+				<input id="search_Date" type="text" class="form-control" style="width: 340px;" aria-describedby="basic-addon1">
+			</div>
+			<button type="button" style="margin-left: 8px;width: 80px;" id="searchBtn" class="btn btn-default">搜索</button>
+		</div>
+
+		<button class="btn" style="float: left;margin-left: 100px;margin-bottom: 40px;">
+    <a href="./index.html">主链</a>
+</button>
+		<button class="btn" style="float: left;margin-left: 20px;margin-bottom: 40px;">
+    <a href="./otherlink.html">侧链</a>
+</button>
+		<button class="btn" style="float: left;margin-left: 20px;margin-bottom: 40px;">
+    <a href="javascript:void()">查询</a>
+</button>
+
+		<div id="page">
+			<div id="right_panel">
+				<div id="graph_panel" class="q-panel">
+					<div role="toolbar" class="q-toolbar">
+						<div>
+							<div id="toolbar"></div>
+						</div>
+					</div>
+					<div class="q-content">
+						<table id="myTable" class="" style="width: 100%;height:600px;"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="alert alert-success hide" role="alert" id="success-msg">正确</div>
+
+		<div class="alert alert-danger hide" role="alert" id="error-msg">数据出错</div>
+
+		<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
+		<script type="text/javascript" src="lib/datatable/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="lib/moment.min.js"></script>
+		<script type="text/javascript" src="lib/datatable/daterangepicker.min.js"></script>
+		<script type="text/javascript" src="basic/search.js"></script>
+	</body>
+
+</html>
