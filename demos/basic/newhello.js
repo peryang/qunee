@@ -187,8 +187,8 @@ function render(url, data) {
     $.ajax({
         url: "/v1/chaincode/operation",
         type:"post",
-//      url: url,
-//      type:"get",
+        // url: url,
+        // type:"get",
         data: JSON.stringify(data),
         dataType: "json",
         success: function(json) {
@@ -201,8 +201,9 @@ function render(url, data) {
                     var switchData = switchParseData(json.response_data.data);
                     var nodes = switchData.nodes;
                     var edges = switchData.edges;
-                    
-                    var parseNodes = parseData(nodes);
+                    var tmpparseNodes = parseData(nodes)
+                    var parseNodes = tmpparseNodes.parseNodes;
+                    var levelData = tmpparseNodes.levelData;
                     var level = 1;
                     var num = (levelMap[level] || 0) + 1;
                     for(var p = 0; p < parseNodes.length; p ++) {
@@ -218,6 +219,14 @@ function render(url, data) {
                     for (var e = 0; e < edges.length;  e ++) {
                         if (allNodeMap[edges[e].source] && allNodeMap[edges[e].target] && checkEdge(edges[e].source, edges[e].target)) {
                             allEdges.push(edges[e]);
+                        }
+                    }
+                    for (var dy = 0; dy < allNodes.length; dy ++) {
+                        if (allNodes[dy].parentID && allNodes[dy].y < allNodeMap[allNodes[dy].parentID].y) {
+                            var tmpLevelData = levelData[allNodes[dy].level + ""];
+                            for (var ld = tmpLevelData.indexOf(allNodes[dy].id); ld < tmpLevelData.length; ld ++) {
+                                allNodeMap[tmpLevelData[ld]].y += 100;
+                            }
                         }
                     }
                     myChart.setOption({series: {data: allNodes, links: allEdges}});
@@ -279,6 +288,7 @@ function switchParseData(data) {
     var edges = [];
     for (var e = 0; e < data.edges.length;  e ++) {
         if (nodes2uuid[data.edges[e].from] && nodes2uuid[data.edges[e].to]) {
+            nodes[nodes2uuid[data.edges[e].to]].parentID = nodes2uuid[data.edges[e].from];
             edges.push({
                 source: nodes2uuid[data.edges[e].from],
                 target: nodes2uuid[data.edges[e].to]
@@ -301,7 +311,10 @@ function parseData(data) {
     for(var j in json) {
         result = [...result, ...json[j]];
     }
-    return result;
+    return {
+        parseNodes: result,
+        levelData: json
+    };
 }
 
 $(function () {
