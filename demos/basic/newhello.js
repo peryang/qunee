@@ -85,10 +85,10 @@ function initChart() {
 
 function render(url, data) {
     $.ajax({
-        // url: "/v1/chaincode/operation",
-        // type:"post",
-        url: url,
-        type:"get",
+        url: "/v1/chaincode/operation",
+        type:"post",
+        // url: url,
+        // type:"get",
         data: JSON.stringify(data),
         dataType: "json",
         success: function(json) {
