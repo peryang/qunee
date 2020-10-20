@@ -264,6 +264,26 @@
                     "type": "type1",
                     "level": 5
                 },
+                "node15": {
+                    "id": "node15",
+                    "qbwym": "157____92811000000110000",
+                    "name": "战区素材xx",
+                    "QBLX": "1",
+                    "CPSC": "0",
+                    "SLSJ": "2020\/1\/5 23:17:00",
+                    "SBDW": "战区1",
+                    "ZBDW": "战区1",
+                    "PY": "评优",
+                    "FWBH": "84",
+                    "BWXS": "报文形式",
+                    "SCBM": "",
+                    "TJM": "zhanqusucai84",
+                    "YYSCDW": "",
+                    "LOGHASH": "123456",
+                    "images": "abc.png",
+                    "type": "type2",
+                    "level": 2
+                },
                 "node14": {
                     "id": "node14",
                     "qbwym": "157831592811000000110000",
@@ -289,6 +309,10 @@
                 {
                     "from": "node1",
                     "to": "node14"
+                },
+                {
+                    "from": "node1",
+                    "to": "node15"
                 },
                 {
                     "from": "node1",

@@ -185,10 +185,10 @@ function initChart() {
 
 function render(url, data) {
     $.ajax({
-        url: "/v1/chaincode/operation",
-        type:"post",
-        // url: url,
-        // type:"get",
+        // url: "/v1/chaincode/operation",
+        // type:"post",
+        url: url,
+        type:"get",
         data: JSON.stringify(data),
         dataType: "json",
         success: function(json) {
@@ -222,9 +222,10 @@ function render(url, data) {
                         }
                     }
                     for (var dy = 0; dy < allNodes.length; dy ++) {
-                        if (allNodes[dy].parentID && allNodes[dy].y < allNodeMap[allNodes[dy].parentID].y) {
+                        while (allNodes[dy].parentID && allNodes[dy].y < allNodeMap[allNodes[dy].parentID].y) {
                             var tmpLevelData = levelData[allNodes[dy].level + ""];
-                            for (var ld = tmpLevelData.indexOf(allNodes[dy].id); ld < tmpLevelData.length; ld ++) {
+                            levelMap[allNodes[dy].level + ""] += 1;
+                            for (var ld = tmpLevelData.indexOf(allNodes[dy].id); ld > 0 && ld < tmpLevelData.length; ld ++) {
                                 allNodeMap[tmpLevelData[ld]].y += 100;
                             }
                         }
