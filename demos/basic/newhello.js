@@ -1,57 +1,7 @@
 var allNodeMap = {};
-var allNodes = [{
-    symbolSize: 0,
-    x: 700,
-    y: 900
-}, {
-    symbolSize: 0,
-    x: 700,
-    y: 1600
-}, {
-    symbolSize: 0,
-    x: 300,
-    y: 900
-}, {
-    symbolSize: 0,
-    x: 300,
-    y: 1600
-}, {
-    symbolSize: 0.00001,
-    symbol: 'arrow',
-    name: 'ZQ',
-    x: 900,
-    y: 1000
-}, {
-    symbolSize: 0.00001,
-    symbol: 'arrow',
-    name: 'ZQFY',
-    x: 500,
-    y: 1000
-}, {
-    symbolSize: 0.00001,
-    symbol: 'arrow',
-    name: 'BD',
-    x: 100,
-    y: 1000
-}];
+var allNodes = [];
 var allNodeID = [];
-var allEdges = [{
-    source: 0,
-    target: 1,
-    lineStyle: {
-        opacity: 0.9,
-        width: 1,
-        curveness: 0
-    }
-}, {
-    source: 2,
-    target: 3,
-    lineStyle: {
-        opacity: 0.9,
-        width: 1,
-        curveness: 0
-    }
-}];
+var allEdges = [];
 var levelMap = {};
 
 var myChart = echarts.init(document.getElementById('canvas'));
@@ -128,58 +78,8 @@ function initChart() {
     levelMap = {};
     allNodeMap = {};
     allNodeID = [];
-    allNodes = [{
-        symbolSize: 0,
-        x: 700,
-        y: 900
-    }, {
-        symbolSize: 0,
-        x: 700,
-        y: 1600
-    }, {
-        symbolSize: 0,
-        x: 300,
-        y: 900
-    }, {
-        symbolSize: 0,
-        x: 300,
-        y: 1600
-    }, {
-        symbolSize: 0.00001,
-        symbol: 'arrow',
-        name: 'ZQ',
-        x: 900,
-        y: 1000
-    }, {
-        symbolSize: 0.00001,
-        symbol: 'arrow',
-        name: 'ZQFY',
-        x: 500,
-        y: 1000
-    }, {
-        symbolSize: 0.00001,
-        symbol: 'arrow',
-        name: 'BD',
-        x: 100,
-        y: 1000
-    }];
-    allEdges = [{
-        source: 0,
-        target: 1,
-        lineStyle: {
-            opacity: 0.9,
-            width: 1,
-            curveness: 0
-        }
-    }, {
-        source: 2,
-        target: 3,
-        lineStyle: {
-            opacity: 0.9,
-            width: 1,
-            curveness: 0
-        }
-    }];
+    allNodes = [];
+    allEdges = [];
     myChart.setOption({series: {data: allNodes, links: allEdges}});
 }
 
@@ -282,6 +182,7 @@ function switchParseData(data) {
         if (data.nodes[i].qbwym && data.nodes[i].level) {
             var newUUID = data.nodes[i].qbwym + "_" + data.nodes[i].level;
             data.nodes[i].id = newUUID;
+            data.nodes[i].name = '';
             nodes[newUUID] = data.nodes[i];
             nodes2uuid[i] = newUUID;
         }
@@ -292,7 +193,10 @@ function switchParseData(data) {
             nodes[nodes2uuid[data.edges[e].to]].parentID = nodes2uuid[data.edges[e].from];
             edges.push({
                 source: nodes2uuid[data.edges[e].from],
-                target: nodes2uuid[data.edges[e].to]
+                target: nodes2uuid[data.edges[e].to],
+                lineStyle: {
+                    curveness: 0.2
+                }
             });
         }
     }

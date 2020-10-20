@@ -482,3 +482,23 @@ li.disabled > a {
 	width: 200px;
 	text-align: center;
 }
+
+.index_legend {
+  position: absolute; top: 20px; left: 30px;
+}
+
+.index_legend div {
+  width: 100px;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  background-size: contain;
+}
+
+.index_legend_abc {
+  margin-top: 3px;
+  background-image: url('./network/images/abc.png');
+}
+
+.index_legend_def {
+  background-image: url('./network/images/def.png');
+}
