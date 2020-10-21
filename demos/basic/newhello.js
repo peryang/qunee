@@ -30,7 +30,7 @@ myChart.setOption({
         symbolSize: 50,
         roam: true,
         label: {
-            show: true,
+            show: false,
             position: 'bottom',
             color: 'black'
         },
@@ -182,7 +182,6 @@ function switchParseData(data) {
         if (data.nodes[i].qbwym && data.nodes[i].level) {
             var newUUID = data.nodes[i].qbwym + "_" + data.nodes[i].level;
             data.nodes[i].id = newUUID;
-            data.nodes[i].name = '';
             nodes[newUUID] = data.nodes[i];
             nodes2uuid[i] = newUUID;
         }
@@ -193,10 +192,7 @@ function switchParseData(data) {
             nodes[nodes2uuid[data.edges[e].to]].parentID = nodes2uuid[data.edges[e].from];
             edges.push({
                 source: nodes2uuid[data.edges[e].from],
-                target: nodes2uuid[data.edges[e].to],
-                lineStyle: {
-                    curveness: 0.2
-                }
+                target: nodes2uuid[data.edges[e].to]
             });
         }
     }
