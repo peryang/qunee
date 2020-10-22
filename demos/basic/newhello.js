@@ -12,7 +12,7 @@ myChart.setOption({
     tooltip: {
         show: true,
         formatter: function(item) {
-            return (item.data.name ? '<div class="tooltip-item">标题: ' + item.data.name + '</div>' : '') +
+            return (item.data.xname ? '<div class="tooltip-item">标题: ' + item.data.xname + '</div>' : '') +
             (item.data.SBDW ? '<div class="tooltip-item">上报单位: ' + item.data.SBDW + '</div>' : '') +
             (item.data.ZBDW ? '<div class="tooltip-item">整编单位: ' + item.data.ZBDW + '</div>' : '') +
             (item.data.PY ? '<div class="tooltip-item">评优: ' + item.data.PY + '</div>' : '') +
@@ -57,7 +57,7 @@ myChart.on('dblclick', function (params) {
         CZLX = "1";
     } else if (params.data.type === "type2") {
         url = "./sucaiClick.json";
-        CZLX = "4";
+        CZLX = "6";
     }
     render(url, {
         "CZLX": CZLX,
@@ -65,7 +65,7 @@ myChart.on('dblclick', function (params) {
         "YHID": localStorage.getItem("YHID"),
         "BMID": localStorage.getItem("BMID"),
         "SZ":{
-            "BT": params.data.name || "",
+            "BT": params.data.xname || "",
             "TJM": params.data.TJM || "",
             "FWBH": params.data.FWBH || "",
             "LEVEL": params.data.level || "",
@@ -182,6 +182,8 @@ function switchParseData(data) {
         if (data.nodes[i].qbwym && data.nodes[i].level) {
             var newUUID = data.nodes[i].qbwym + "_" + data.nodes[i].level;
             data.nodes[i].id = newUUID;
+            data.nodes[i].xname = data.nodes[i].name;
+            data.nodes[i].name = '';
             nodes[newUUID] = data.nodes[i];
             nodes2uuid[i] = newUUID;
         }
@@ -225,7 +227,7 @@ $(function () {
             type: "post",
             contentType: "application/json",
             data:JSON.stringify({
-                "CZLX": "4",
+                "CZLX": "6",
                 "DYLX": "insert",
                 "QBtype": "1",
                 "SZ":{

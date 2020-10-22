@@ -24,7 +24,7 @@ graph.ondblclick = function(evt){
         CZLX = "1";
     } else if (nodeData.type === "type2") {
         url = "./sucaiClick.json";
-        CZLX = "4";
+        CZLX = "6";
     }
     render(url, {
         "CZLX": CZLX,
@@ -228,7 +228,7 @@ $(function () {
             type: "post",
             contentType: "application/json",
             data:JSON.stringify({
-                "CZLX": "4",
+                "CZLX": "6",
                 "DYLX": "insert",
                 "QBtype": "1",
 				"SZ":{
