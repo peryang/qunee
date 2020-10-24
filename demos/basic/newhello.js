@@ -87,8 +87,8 @@ function render(url, data) {
     $.ajax({
         url: "/v1/chaincode/operation",
         type:"post",
-        // url: url,
-        // type:"get",
+        url: url,
+        type:"get",
         data: JSON.stringify(data),
         dataType: "json",
         success: function(json) {
@@ -125,7 +125,10 @@ function render(url, data) {
                         while (allNodes[dy].parentID && allNodes[dy].y < allNodeMap[allNodes[dy].parentID].y) {
                             var tmpLevelData = levelData[allNodes[dy].level + ""];
                             levelMap[allNodes[dy].level + ""] += 1;
-                            for (var ld = tmpLevelData.indexOf(allNodes[dy].id); ld > 0 && ld < tmpLevelData.length; ld ++) {
+                            for (var ld = (tmpLevelData && allNodes[dy] && allNodes[dy].id) ? tmpLevelData.indexOf(allNodes[dy].id) : 0;
+                                    ld >= 0 && ld < tmpLevelData.length;
+                                    ld ++
+                                ) {
                                 allNodeMap[tmpLevelData[ld]].y += 100;
                             }
                         }
