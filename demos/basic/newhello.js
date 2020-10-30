@@ -1,7 +1,57 @@
 var allNodeMap = {};
-var allNodes = [];
+var allNodes = [{
+    symbolSize: 0,
+    x: 700,
+    y: 900
+}, {
+    symbolSize: 0,
+    x: 700,
+    y: 1600
+}, {
+    symbolSize: 0,
+    x: 300,
+    y: 900
+}, {
+    symbolSize: 0,
+    x: 300,
+    y: 1600
+}, {
+    symbolSize: 0.00001,
+    symbol: 'arrow',
+    name: 'ZQ',
+    x: 900,
+    y: 1000
+}, {
+    symbolSize: 0.00001,
+    symbol: 'arrow',
+    name: 'ZQFY',
+    x: 500,
+    y: 1000
+}, {
+    symbolSize: 0.00001,
+    symbol: 'arrow',
+    name: 'BD',
+    x: 100,
+    y: 1000
+}];
 var allNodeID = [];
-var allEdges = [];
+var allEdges = [{
+    source: 0,
+    target: 1,
+    lineStyle: {
+        opacity: 0.9,
+        width: 1,
+        curveness: 0
+    }
+}, {
+    source: 2,
+    target: 3,
+    lineStyle: {
+        opacity: 0.9,
+        width: 1,
+        curveness: 0
+    }
+}];
 var levelMap = {};
 
 var myChart = echarts.init(document.getElementById('canvas'));
@@ -30,7 +80,7 @@ myChart.setOption({
         symbolSize: 50,
         roam: true,
         label: {
-            show: false,
+            show: true,
             position: 'bottom',
             color: 'black'
         },
@@ -78,8 +128,58 @@ function initChart() {
     levelMap = {};
     allNodeMap = {};
     allNodeID = [];
-    allNodes = [];
-    allEdges = [];
+    allNodes = [{
+        symbolSize: 0,
+        x: 700,
+        y: 900
+    }, {
+        symbolSize: 0,
+        x: 700,
+        y: 1600
+    }, {
+        symbolSize: 0,
+        x: 300,
+        y: 900
+    }, {
+        symbolSize: 0,
+        x: 300,
+        y: 1600
+    }, {
+        symbolSize: 0.00001,
+        symbol: 'arrow',
+        name: 'ZQ',
+        x: 900,
+        y: 1000
+    }, {
+        symbolSize: 0.00001,
+        symbol: 'arrow',
+        name: 'ZQFY',
+        x: 500,
+        y: 1000
+    }, {
+        symbolSize: 0.00001,
+        symbol: 'arrow',
+        name: 'BD',
+        x: 100,
+        y: 1000
+    }];
+    allEdges = [{
+        source: 0,
+        target: 1,
+        lineStyle: {
+            opacity: 0.9,
+            width: 1,
+            curveness: 0
+        }
+    }, {
+        source: 2,
+        target: 3,
+        lineStyle: {
+            opacity: 0.9,
+            width: 1,
+            curveness: 0
+        }
+    }];
     myChart.setOption({series: {data: allNodes, links: allEdges}});
 }
 
@@ -87,8 +187,8 @@ function render(url, data) {
     $.ajax({
         url: "/v1/chaincode/operation",
         type:"post",
-        url: url,
-        type:"get",
+        // url: url,
+        // type:"get",
         data: JSON.stringify(data),
         dataType: "json",
         success: function(json) {

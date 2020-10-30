@@ -15,6 +15,7 @@ myChart.setOption({
             if (item.data.type === "type1" || item.data.type === "type2")
                 return (item.data.name ? '<div class="tooltip-item">标题: ' + item.data.name + '</div>' : '') +
                         (item.data.SBDW ? '<div class="tooltip-item">上报单位: ' + item.data.SBDW + '</div>' : '') +
+                        (item.data.YHBH ? '<div class="tooltip-item">修改用户: ' + item.data.YHBH + '</div>' : '') +
                         (item.data.ZBDW ? '<div class="tooltip-item">整编单位: ' + item.data.ZBDW + '</div>' : '') +
                         (item.data.PY ? '<div class="tooltip-item">评优: ' + item.data.PY + '</div>' : '') +
                         (item.data.FWBH ? '<div class="tooltip-item">发文编号: ' + item.data.FWBH + '</div>' : '') +
@@ -71,8 +72,8 @@ function render(url, data) {
     $.ajax({
         url: "/v1/chaincode/operation",
         type:"post",
-     url: url,
-     type:"get",
+        // url: url,
+        // type:"get",
         data: JSON.stringify(data),
         dataType: "json",
         success: function(json) {
